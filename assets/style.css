@@ -1,0 +1,55 @@
+.meios-canais-widget {
+  display: flex;
+  background: #1818a7;
+  color: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.mc-sidebar {
+  width: 25%;
+  background: #1e1eb3;
+  padding: 30px 15px;
+}
+.mc-item {
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: white;
+  position: relative;
+  padding-left: 10px;
+}
+.mc-item.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: #d9cd2c;
+  border-radius: 4px;
+}
+.mc-item:hover {
+  color: #d9cd2c;
+}
+.mc-content {
+  width: 75%;
+  padding: 40px;
+  position: relative;
+}
+.mc-header h5 {
+  font-size: 18px;
+  margin: 0;
+}
+.mc-header h2 {
+  font-size: 32px;
+  margin: 5px 0 20px;
+  font-weight: 800;
+}
+.mc-panel {
+  animation: fadeIn 0.5s ease;
+}
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
