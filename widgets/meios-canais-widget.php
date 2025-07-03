@@ -1,27 +1,34 @@
 <?php
+
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Repeater;
 
-class Meios_Canais_Widget extends Widget_Base {
+class Meios_Canais_Widget extends Widget_Base
+{
 
-    public function get_name() {
+    public function get_name()
+    {
         return 'meios_canais';
     }
 
-    public function get_title() {
+    public function get_title()
+    {
         return 'Meios e Canais';
     }
 
-    public function get_icon() {
+    public function get_icon()
+    {
         return 'eicon-post-list';
     }
 
-    public function get_categories() {
+    public function get_categories()
+    {
         return ['general'];
     }
 
-    protected function register_controls() {
+    protected function register_controls()
+    {
 
         $this->start_controls_section('content_section', [
             'label' => 'Conteúdo',
@@ -41,22 +48,23 @@ class Meios_Canais_Widget extends Widget_Base {
 
         $repeater = new Repeater();
 
-        $repeater->add_control('item_label', [
-            'label' => 'Nome do Item',
+        $repeater->add_control('item_title', [
+            'label' => 'Título',
             'type' => Controls_Manager::TEXT,
-            'default' => 'TVs',
+            'default' => 'TV’s',
         ]);
 
-        $repeater->add_control('item_content', [
+        $repeater->add_control('item_description', [
             'label' => 'Descrição',
             'type' => Controls_Manager::TEXTAREA,
-            'default' => 'Texto de descrição aqui...',
+            'default' => 'Veiculação de mídia nos mais variados canais...',
         ]);
 
         $repeater->add_control('item_image', [
             'label' => 'Imagem',
             'type' => Controls_Manager::MEDIA,
         ]);
+
 
         $this->add_control('items', [
             'label' => 'Itens da Lista',
@@ -68,13 +76,15 @@ class Meios_Canais_Widget extends Widget_Base {
         $this->end_controls_section();
     }
 
-    protected function render() {
+    protected function render()
+    {
         $settings = $this->get_settings_for_display();
-        ?>
+?>
         <div class="meios-canais-widget">
             <div class="mc-sidebar">
+                <div class="mc-line-indicator"></div>
                 <?php foreach ($settings['items'] as $index => $item): ?>
-                    <div class="mc-item" data-index="<?php echo $index; ?>"><?php echo $item['item_label']; ?></div>
+                    <div class="mc-item" data-index="<?php echo $index; ?>"><?php echo $item['item_title']; ?></div>
                 <?php endforeach; ?>
             </div>
             <div class="mc-content">
@@ -85,13 +95,23 @@ class Meios_Canais_Widget extends Widget_Base {
                 <div class="mc-details">
                     <?php foreach ($settings['items'] as $index => $item): ?>
                         <div class="mc-panel" data-index="<?php echo $index; ?>" style="<?php echo $index === 0 ? '' : 'display:none;'; ?>">
-                            <img src="<?php echo $item['item_image']['url']; ?>" alt="">
-                            <p><?php echo $item['item_content']; ?></p>
+                            <div class="mc-panel-inner">
+                                <div class="mc-panel-text">
+                                    <h3><?php echo $item['item_title']; ?></h3>
+                                    <p><?php echo $item['item_description']; ?></p>
+                                </div>
+                                <div class="mc-panel-image">
+                                    <?php if (!empty($item['item_image']['url'])): ?>
+                                        <div class="circle-bg"></div>
+                                        <img src="<?php echo $item['item_image']['url']; ?>" alt="">
+                                    <?php endif; ?>
+                                </div>
+                            </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
             </div>
         </div>
-        <?php
+<?php
     }
 }
