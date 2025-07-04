@@ -4,7 +4,7 @@ jQuery(document).ready(function ($) {
   function moveIndicator($el) {
     const elTop = $el.position().top;
     const elHeight = $el.outerHeight();
-    const indicatorTop = elTop + (elHeight / 2) - 2; // centraliza a linha
+    const indicatorTop = elTop + (elHeight / 2) + 4; // centraliza a linha
     indicator.removeClass('visible');
     setTimeout(() => {
       indicator.css('top', indicatorTop + 'px');
